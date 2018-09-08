@@ -15,12 +15,12 @@
     <div class="flex-container">
       <div class="options align-items">
         <ul>
-          <span class="button">Option One</span>
+          <span class="button">Option Three</span>
         </ul>
       </div>
       <div class="options align-items">
         <ul>
-          <span class="button">Option Two</span>
+          <span class="button">Option Four</span>
         </ul>
       </div>
     </div>
