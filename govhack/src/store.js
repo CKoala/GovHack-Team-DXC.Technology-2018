@@ -23,6 +23,9 @@ firestore.settings(settings)
 const userCollection = firestore
   .collection('users')
 
+  const Demo = firestore
+    .collection('Demo')
+
 // The shared state object that any vue component can get access to.
 // Has some placeholders that weâ€™ll use further on!
 

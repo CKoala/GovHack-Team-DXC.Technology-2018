@@ -1,9 +1,9 @@
 <template>
   <div class="home">
-    <div class="flex-container">
+    <div class="flex-container" >
       <div class="options align-items">
         <ul>
-          <span class="button">Option One</span>
+          <span class="button">{{title}}</span>
         </ul>
       </div>
       <div class="options align-items">
@@ -12,29 +12,28 @@
         </ul>
       </div>
     </div>
-    <div class="flex-container">
-      <div class="options align-items">
-        <ul>
-          <span class="button">Option Three</span>
-        </ul>
-      </div>
-      <div class="options align-items">
-        <ul>
-          <span class="button">Option Four</span>
-        </ul>
-      </div>
-    </div>
   </div>
 </template>
 
 <script>
+import {store, dbStore} from '../store.js'
+import 'firebase/firestore'
 export default {
   name: 'Home',
   data () {
     return {
+      data: {
+      title: this.title
+    }
+    }
+  },
+  firestore () {
+    return {
+      title:  'test'
     }
   }
 }
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
