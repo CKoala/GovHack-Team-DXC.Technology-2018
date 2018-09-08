@@ -3,6 +3,8 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import 'bulma/css/bulma.min.css'
+import firebase from 'firebase'
 
 Vue.config.productionTip = false
 
