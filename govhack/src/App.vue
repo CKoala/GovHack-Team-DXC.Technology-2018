@@ -51,6 +51,22 @@ body {
   width: 100%;
 }
 
+.color-one {
+  background-color: #EDEDEE
+}
+
+.color-two {
+ background-color: #272C34
+}
+
+.color-three {
+  background-color: #3C4048
+}
+
+.color-four {
+  background-color: #7870E9
+}
+
 .padding {
   padding: 1em;
 }
@@ -60,23 +76,23 @@ body {
   color: #000000;
 }
 
-.heading-title {
-  font-size: 19pt;
+.heading {
+  font-size: 20pt;
   color: #000000;
 }
 
-.sub-title {
-  font-size: 13pt;
+.btn-txt {
+  font-size: 16pt;
   color: #000000;
 }
 
-.sub-heading {
-  font-size: 10pt;
+.small-txt {
+  font-size: 12pt;
   color: #000000;
 }
 
 .paragraph {
-  font-size: 9pt;
+  font-size: 14pt;
   color: #000000;
 }
 

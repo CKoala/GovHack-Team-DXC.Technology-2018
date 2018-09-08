@@ -3,24 +3,24 @@
     <div class="flex-container">
       <div class="options align-items">
         <ul>
-          <span class="button">Option One</span>
+          <span class="button btn-txt color-one">Option One</span>
         </ul>
       </div>
       <div class="options align-items">
         <ul>
-          <span class="button">Option Two</span>
+          <span class="button btn-txt color-two">Option Two</span>
         </ul>
       </div>
     </div>
     <div class="flex-container">
       <div class="options align-items">
         <ul>
-          <span class="button">Option Three</span>
+          <span class="button btn-txt color-three">Option Three</span>
         </ul>
       </div>
       <div class="options align-items">
         <ul>
-          <span class="button">Option Four</span>
+          <span class="button btn-txt color-four">Option Four</span>
         </ul>
       </div>
     </div>

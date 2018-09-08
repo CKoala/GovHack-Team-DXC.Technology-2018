@@ -3,8 +3,8 @@
     <div class="flex-container">
       <div class="options">
         <p class="title">TEAM DXC!!!!!!!!! </p>
-          <div id="app">
-            <google-map />
+        <div id="app">
+          <google-map />
         </div>
       </div>
     </div>
