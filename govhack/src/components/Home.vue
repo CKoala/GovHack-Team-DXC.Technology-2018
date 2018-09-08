@@ -1,9 +1,9 @@
 <template>
   <div class="home">
-    <div class="flex-container">
-      <div class="options align-items">
+    <div class="flex-container" >
+      <div class="options align-items" v-on:click="demoFunction">
         <ul>
-          <span class="button btn-txt color-one">Option One</span>
+          <span class="button btn-txt color-one" >{{title}}</span>
         </ul>
       </div>
       <div class="options align-items">
@@ -28,13 +28,41 @@
 </template>
 
 <script>
+import {store, dbStore} from '../store.js'
+import firebase from 'firebase/app'
+import 'firebase/firestore'
 export default {
   name: 'Home',
+  mounted(){
+
+  },
   data () {
     return {
+      data: {
+      title: ''
+    }
+    }
+  },
+  firestore () {
+    return {
+      title:  'test'
+    }
+  },
+  method: {
+    demoFunction () {
+      var self = this
+      dbStore.displayDemo({
+        'name' : self.title
+      },
+        (docs) => {
+        },
+        (err) => {
+          alert(err)
+        })
     }
   }
 }
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

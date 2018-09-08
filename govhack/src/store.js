@@ -23,6 +23,9 @@ firestore.settings(settings)
 const userCollection = firestore
   .collection('users')
 
+const demoCollection = firestore
+  .collection('Demo')
+
 // The shared state object that any vue component can get access to.
 // Has some placeholders that weâ€™ll use further on!
 
@@ -38,4 +41,13 @@ export const store = new Vuex.Store({
 })
 
 export const dbStore = {
+  displayDemo: (demo, fnSuccess, fnFail) => {
+    var query = demoCollection
+      .where('GovHack2018', '==', demo)
+
+    query
+      .get()
+      .then((querySnapshot) => fnSuccess(querySnapshot))
+      .catch(e => fnFail(e))
+  }
 }
