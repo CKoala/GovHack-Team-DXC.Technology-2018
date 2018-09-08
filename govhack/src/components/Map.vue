@@ -2,7 +2,7 @@
   <div class="home">
     <div class="flex-container">
       <div class="options">
-        <p class="title">TEAM DXC!!!!!!!!! </p>
+        <p class="title">Maps </p>
           <div id="app">
             <google-map />
         </div>
@@ -40,5 +40,7 @@
 
   .options {
     padding: 3em;
+    width: 100%;
+    align-items: center;
   }
 </style>
