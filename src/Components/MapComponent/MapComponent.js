@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import ReactMapboxGl, {
   ZoomControl,
   Layer,
@@ -14,11 +15,14 @@ class MapComponent extends React.Component {
     this.onSelect = this.onSelect.bind(this);
     this.onMapClicked = this.onMapClicked.bind(this);
     this.onZoomClicked = this.onZoomClicked.bind(this);
+    this.loadDataFromJson = this.loadDataFromJson.bind(this);
+    this.setFilter = this.setFilter.bind(this);
 
     this.state = {
       visible: false,
       zoom: [11],
-      uploading: false
+      uploading: false,
+      filter: ""
     };
   }
 
@@ -36,17 +40,18 @@ class MapComponent extends React.Component {
   }
 
   async loadDataFromJson() {
+    if (this.state.filter === "") return;
+
     let response = await fetch("/data.json");
     let points = await response.json();
-    console.log(points);
 
     let multipliedPoints = [];
 
     points.forEach(point => {
       console.log(point.population);
 
-      let strength =
-        point["Accommodation and food services"] / point.population;
+      //"Accommodation and food services"
+      let strength = point[this.state.filter] / point.population;
 
       for (var i = 0; i < strength; i += 1) {
         multipliedPoints.push({ lat: point.lat, lng: point.lng });
@@ -61,6 +66,17 @@ class MapComponent extends React.Component {
     // this.setState({
     //   points
     // });
+  }
+
+  componentWillReceiveProps(newProps) {
+    this.setFilter(newProps.filter);
+  }
+
+  setFilter(filter) {
+    this.setState({
+      filter
+    });
+    this.loadDataFromJson();
   }
 
   onSelect = (result, lat, lng, text) => {};
@@ -167,4 +183,10 @@ class MapComponent extends React.Component {
   }
 }
 
-export default MapComponent;
+function mapStateToProps(state) {
+  return {
+    filter: state.filter
+  };
+}
+
+export default connect(mapStateToProps)(MapComponent);
