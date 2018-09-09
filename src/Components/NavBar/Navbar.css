@@ -102,12 +102,17 @@
   text-align: center;
   align-items: center;
 }
-.filter:active {
+.filter.active {
   background-color: #7870e9;
   color: #e6e6e6;
 }
 .filter:hover {
-  background-color: #948EE8;
-  color:#E6E6E6;
-  box-shadow: 0.5px 1px #7870E9;
+  background-color: #948ee8;
+  color: #e6e6e6;
+  box-shadow: 0.5px 1px #7870e9;
+  cursor: pointer;
+}
+
+.tooltip-theme {
+  background-color: #948ee8 !important;
 }

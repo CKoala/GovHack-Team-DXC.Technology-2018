@@ -1,4 +1,5 @@
 import React from "react";
+import ReactTooltip from "react-tooltip";
 import { connect } from "react-redux";
 import "./Navbar.css";
 import { setFilter } from "../../actions/filterActions";
@@ -20,6 +21,7 @@ class Navbar extends React.Component {
   render() {
     return (
       <div className="nav-container">
+        <ReactTooltip place="bottom" effect="float" className="tooltip-theme" />
         <div className="search-container">
           <div className="search_bar_left">
             <div className="logo-container left_style hidden-xs">
@@ -51,48 +53,69 @@ class Navbar extends React.Component {
               onClick={() => {
                 this.updateFilter("Accommodation and food services");
               }}
+              data-tip="Accommodation and food services"
             >
               <i className="icon fas fa-hotel" />
             </div>
           </div>
           <div className="filter-space-two">
             <div
-              className="filter"
+              className={
+                this.props.filter === "Arts and recreation services"
+                  ? "filter active"
+                  : "filter"
+              }
               onClick={() => {
                 this.updateFilter("Arts and recreation services");
               }}
+              data-tip="Arts and recreation services"
             >
               <i className="icon fas fa-palette" />
             </div>
           </div>
           <div className="filter-space-three">
             <div
-              className="filter"
+              className={
+                this.props.filter === "Financial and insurance services"
+                  ? "filter active"
+                  : "filter"
+              }
               onClick={() => {
                 this.updateFilter("Financial and insurance services");
               }}
+              data-tip="Financial and insurance services"
             >
               <i className="icon fas fa-dollar-sign" />
             </div>
           </div>
           <div className="filter-space-four">
             <div
-              className="filter"
+              className={
+                this.props.filter === "Health care and social assistance"
+                  ? "filter active"
+                  : "filter"
+              }
               onClick={() => {
                 this.updateFilter("Health care and social assistance");
               }}
+              data-tip="Health care and social assistance"
             >
               <i className="icon far fa-hospital" />
             </div>
           </div>
           <div className="filter-space-five">
             <div
-              className="filter"
+              className={
+                this.props.filter === "Information media and telecommunications"
+                  ? "filter active"
+                  : "filter"
+              }
               onClick={() => {
                 this.updateFilter("Information media and telecommunications");
               }}
+              data-tip="Information media and telecommunications"
             >
-              <i className="icon fab fa-amilia" />
+              <i className="icon fas fa-broadcast-tower" />
             </div>
           </div>
           <div className="filter-space-right" />
