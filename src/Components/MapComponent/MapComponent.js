@@ -36,7 +36,7 @@ class MapComponent extends React.Component {
       );
     }
 
-    this.loadDataFromJson();
+    this.setFilter("Arts and recreation services");
   }
 
   async loadDataFromJson() {
