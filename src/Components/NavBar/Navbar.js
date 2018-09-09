@@ -43,7 +43,7 @@ class Navbar extends React.Component {
           </div>
           <div className="filter-space-five">
             <div className="filter">
-            <i class="icon fab fa-amilia"></i></div>
+            <i className="icon fab fa-amilia"></i></div>
           </div>
           <div className="filter-space-right">
           </div>
