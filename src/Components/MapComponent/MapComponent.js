@@ -1,5 +1,11 @@
 import React from "react";
-import ReactMapboxGl, { Layer, Feature, Marker } from "react-mapbox-gl";
+import ReactMapboxGl, {
+  ZoomControl,
+  Layer,
+  Feature,
+  Marker
+} from "react-mapbox-gl";
+
 import "./MapComponent.css";
 
 class MapComponent extends React.Component {
@@ -7,6 +13,7 @@ class MapComponent extends React.Component {
     super(props);
     this.onSelect = this.onSelect.bind(this);
     this.onMapClicked = this.onMapClicked.bind(this);
+    this.onZoomClicked = this.onZoomClicked.bind(this);
 
     this.state = {
       visible: false,
@@ -29,12 +36,31 @@ class MapComponent extends React.Component {
   }
 
   async loadDataFromJson() {
-    let response = await fetch("/trees.json");
+    let response = await fetch("/data.json");
     let points = await response.json();
     console.log(points);
-    this.setState({
-      points
+
+    let multipliedPoints = [];
+
+    points.forEach(point => {
+      console.log(point.population);
+
+      let strength =
+        point["Accommodation and food services"] / point.population;
+
+      for (var i = 0; i < strength; i += 1) {
+        multipliedPoints.push({ lat: point.lat, lng: point.lng });
+      }
     });
+
+    console.log(multipliedPoints);
+    this.setState({
+      heatmapData: multipliedPoints
+    });
+
+    // this.setState({
+    //   points
+    // });
   }
 
   onSelect = (result, lat, lng, text) => {};
@@ -44,6 +70,18 @@ class MapComponent extends React.Component {
     // this.setState({
     //   zoom: [map.transform.zoom]
     // });
+  };
+
+  onZoomClicked = (map, zoomDiff) => {
+    console.log(map);
+    console.log(zoomDiff);
+
+    let zoom = parseFloat(this.state.zoom) + parseFloat(zoomDiff);
+    console.log("Change Zoom", zoom);
+
+    this.setState({
+      zoom
+    });
   };
 
   render() {
@@ -58,7 +96,7 @@ class MapComponent extends React.Component {
     var centerMap = [152.903463, -31.431529];
 
     let assetView = <div />;
-    if (this.state.points) {
+    if (this.state.heatmapData) {
       assetView = (
         <Layer
           type="heatmap"
@@ -69,7 +107,7 @@ class MapComponent extends React.Component {
             "heatmap-weight": {
               property: "dbh",
               type: "exponential",
-              stops: [[1, 0], [62, 1]]
+              stops: [[1, 0], [62, 3]]
             },
             // increase intensity as zoom level increases
             "heatmap-intensity": {
@@ -85,33 +123,25 @@ class MapComponent extends React.Component {
               0.2,
               "rgb(208,209,230)",
               0.4,
-              "rgb(166,189,219)",
+              "rgb(166,0,219)",
               0.6,
               "rgb(103,169,207)",
               0.8,
-              "rgb(28,144,153)"
+              "rgb(28,144,255)"
             ],
             // increase radius as zoom increases
             "heatmap-radius": {
-              stops: [[11, 15], [15, 20]]
+              stops: [[11, 80], [15, 100]]
             },
             // decrease opacity to transition into the circle layer
             "heatmap-opacity": {
               default: 1,
-              stops: [[14, 1], [15, 0]]
+              stops: [[14, 0.5], [15, 0]]
             }
           }}
         >
-          {this.state.points.map((point, index) => {
-            return (
-              <Feature
-                key={index}
-                coordinates={[
-                  point.geometry.coordinates[0],
-                  point.geometry.coordinates[1]
-                ]}
-              />
-            );
+          {this.state.heatmapData.map((point, index) => {
+            return <Feature key={index} coordinates={[point.lng, point.lat]} />;
           })}
         </Layer>
       );
@@ -123,22 +153,15 @@ class MapComponent extends React.Component {
           style="mapbox://styles/mapbox/dark-v9"
           center={centerMap}
           onClick={this.onMapClicked}
+          zoom={[this.state.zoom]}
           containerStyle={{
             height: "100%",
             width: "100%"
           }}
         >
-          {this.state.lng && this.state.lat ? (
-            <Marker coordinates={centerMap} anchor="bottom">
-              <img
-                style={{ width: 30, height: 30 }}
-                src="/map-marker.png"
-                alt={"Marker"}
-              />
-            </Marker>
-          ) : null}
           {assetView}
         </Map>
+        <ZoomControl onControlClick={this.onZoomClicked} />
       </div>
     );
   }
