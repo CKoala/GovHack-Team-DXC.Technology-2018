@@ -1,17 +1,15 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 
 import MapComponent from "./Components/MapComponent/MapComponent";
+import NavBar from "./Components/NavBar/Navbar";
 
 class App extends Component {
   render() {
     return (
       <div className="App">
+        <NavBar />
         <MapComponent />
-        <div className="logo-container">
-          <img className="app-logo" src="/app-logo.png" />
-        </div>
       </div>
     );
   }

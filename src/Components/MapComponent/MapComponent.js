@@ -6,9 +6,6 @@ class MapComponent extends React.Component {
   constructor(props) {
     super(props);
     this.onSelect = this.onSelect.bind(this);
-    this.showMap = this.showMap.bind(this);
-    this.handleOk = this.handleOk.bind(this);
-    this.hideMap = this.hideMap.bind(this);
     this.onMapClicked = this.onMapClicked.bind(this);
 
     this.state = {
@@ -40,46 +37,13 @@ class MapComponent extends React.Component {
     });
   }
 
-  handleOk = () => {
-    this.setState({
-      visible: false
-    });
-
-    let lat = this.state.lat;
-    let lng = this.state.lng;
-    if (!lat && !lng) return;
-
-    let form = this.props.form;
-    form.set("lat", lat);
-    form.set("lng", lng);
-
-    this.props.auth.getAccessToken().then(
-      token => {
-        this.props.saveAssets(token, form, this.props.assets);
-      },
-      err => console.log(err)
-    );
-  };
-
-  showMap = () => {
-    this.setState({
-      visible: true
-    });
-  };
-
-  hideMap = () => {
-    this.setState({
-      visible: false
-    });
-  };
-
   onSelect = (result, lat, lng, text) => {};
 
   onMapClicked = (map, e) => {
     console.log(map);
-    this.setState({
-      zoom: [map.transform.zoom]
-    });
+    // this.setState({
+    //   zoom: [map.transform.zoom]
+    // });
   };
 
   render() {
@@ -91,19 +55,7 @@ class MapComponent extends React.Component {
     let Map = ReactMapboxGl({
       accessToken
     });
-
-    let lat = this.state.lat;
-    let lng = this.state.lng;
-    let buttonText = "Select Location";
     var centerMap = [152.903463, -31.431529];
-    let color = "red";
-    let hint = "Location not set!";
-    if (lat && lng) {
-      buttonText = "Show Location";
-      centerMap = [lng, lat];
-      color = "green";
-      hint = "Location set!";
-    }
 
     let assetView = <div />;
     if (this.state.points) {
@@ -168,7 +120,7 @@ class MapComponent extends React.Component {
     return (
       <div id="map">
         <Map
-          style="mapbox://styles/mapbox/streets-v9"
+          style="mapbox://styles/mapbox/dark-v9"
           center={centerMap}
           onClick={this.onMapClicked}
           containerStyle={{
