@@ -93,7 +93,7 @@ class MapComponent extends React.Component {
     let Map = ReactMapboxGl({
       accessToken
     });
-    var centerMap = [152.903463, -31.431529];
+    var centerMap = [149.128341, -35.375121];
 
     let assetView = <div />;
     if (this.state.heatmapData) {
@@ -150,7 +150,7 @@ class MapComponent extends React.Component {
     return (
       <div id="map">
         <Map
-          style="mapbox://styles/mapbox/dark-v9"
+          style="mapbox://styles/mapbox/light-v9"
           center={centerMap}
           onClick={this.onMapClicked}
           zoom={[this.state.zoom]}
